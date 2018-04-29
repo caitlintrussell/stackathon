@@ -1,10 +1,72 @@
 import React, { Component } from 'react';
-import {StyleSheet, TextInput, Text, View, TouchableOpacity, StatusBar } from 'react-native';
-import { connect } from 'react-redux';
+import {StyleSheet, TextInput, Text, View, KeyboardAvoidingView, TouchableOpacity, StatusBar } from 'react-native';
 import HeaderText from '../elements/Header';
 import colors from '../elements/Colors';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
 
-export default class LoginForm extends Component {
+const loginMutation = gql`
+mutation LoginMutation($email: String!, $password: String!) {
+  login(input: {email: $email, password: $password}) {
+    id
+    name
+    email
+    dates {
+      initiator
+      zipCode
+      voteCount
+      memberCount
+    }
+  }
+}
+`;
+
+export const meQuery = gql`
+  query {
+    me {
+      id
+      name
+      email
+      dates {
+        initiator
+        zipCode
+        voteCount
+        memberCount
+      }
+    }
+  }
+`;
+
+class Login extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+       email: '',
+       password: '',
+       loggedIn: false,
+    };
+  }
+  _login = async () => {
+    const { email, password } = this.state
+    try {
+    await this.props.loginMutation({
+      variables: {
+        email,
+        password
+      },
+    })
+    this.setState({ loggedIn: true });
+  }
+  catch (err) {
+    console.error(err);
+  }
+  }
+  goToAccount = async() => {
+    this._login()
+    console.log('I worked????')
+    // this.props.navigation.navigate('Account')
+  }
   render() {
     return (
       <View>
@@ -17,6 +79,7 @@ export default class LoginForm extends Component {
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}
+        onChangeText={(email) => this.setState({email})}
         onSubmitEditing={() => this.passwordInput.focus()}
         />
         <TextInput
@@ -25,9 +88,13 @@ export default class LoginForm extends Component {
         secureTextEntry
         returnKeyType="go"
         placeholderTextColor={colors.orange}
-        ref={(input) => this.passwordInput = input}
+        onChangeText={(password) => this.setState({password})}
+        ref={(input) => {this.passwordInput = input}}
         />
-        <TouchableOpacity style={styles.buttonContainer} >
+        <TouchableOpacity
+        onPress={this.goToAccount}
+        style={styles.buttonContainer}
+        >
           <Text style={styles.button} >SUBMIT</Text>
         </TouchableOpacity>
       </View>
@@ -62,3 +129,9 @@ const styles = StyleSheet.create({
       textShadowRadius: 2
   }
 });
+
+export default compose(
+  graphql(loginMutation, {
+    props: ({ data, mutate }) => ({data, loginMutation: mutate}),
+  })
+)(Login)

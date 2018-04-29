@@ -8,7 +8,6 @@ export default class componentName extends Component {
   render() {
     return (
       <View style={styles.logo}>
-       {/* <Image source={require('../../../../assets/img/dn-white.png')} /> */}
       <Text style={styles.title}>DATE NIGHT</Text>
       </View>
     );

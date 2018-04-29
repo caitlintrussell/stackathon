@@ -4,11 +4,10 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 
 const apolloClient = new ApolloClient({
   link: new HttpLink({
-    credentials: 'same-origin',
+    uri: 'http://127.0.0.1:8080/graphql',
+    credentials: 'include'
   }),
-  cache: new InMemoryCache({
-    dataIdFromObject: obj => obj.id,
-  }),
+  cache: new InMemoryCache(),
 });
 
 export default apolloClient;
