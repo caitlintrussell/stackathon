@@ -2,12 +2,13 @@
 
 import React, { Component } from 'react';
 import {  View, Text, Image, StyleSheet } from 'react-native';
+import colors from './Colors';
 
 export default class componentName extends Component {
   render() {
     return (
       <View style={styles.logo}>
-      <Image source={require('../../../../assets/img/dn-black.png')} />
+       {/* <Image source={require('../../../../assets/img/dn-white.png')} /> */}
       <Text style={styles.title}>DATE NIGHT</Text>
       </View>
     );
@@ -16,10 +17,18 @@ export default class componentName extends Component {
 
 const styles = StyleSheet.create({
   logo: {
-    textAlign: 'center'
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingTop: 5,
   },
   title: {
+    color: '#fff',
     fontFamily: 'AvenirNextCondensed-Medium',
-    fontSize: 45,
+    fontSize: 35,
+    textShadowColor: colors.dkTeal,
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 2,
+    marginTop: 5,
   }
 });
