@@ -19,15 +19,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingTop: 5,
+    paddingTop: 2,
   },
   title: {
     color: '#fff',
     fontFamily: 'AvenirNextCondensed-Medium',
-    fontSize: 35,
+    fontSize: 30,
     textShadowColor: colors.dkTeal,
     textShadowOffset: { width: 1, height: 2 },
     textShadowRadius: 2,
-    marginTop: 5,
   }
 });

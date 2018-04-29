@@ -16,18 +16,32 @@ mutation LoginMutation($email: String!, $password: String!) {
 `;
 
 export const meQuery = gql`
-  query {
-    me {
+query {
+  me {
+    id
+    name
+    email
+    phone
+    dates {
       id
-      name
-      email
-      dates {
-        initiator
-        zipCode
-        voteCount
-        memberCount
+      initiator
+      zipCode
+      members {
+        id
+        name
+        email
       }
+      memberCount
+      votes {
+        id
+        value
+        date {
+          id
+        }
+      }
+      voteCount
     }
   }
+}
 `;
 
