@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import {StyleSheet, TextInput, View, Text} from 'react-native';
+import {StyleSheet, TextInput, View } from 'react-native';
 import { connect } from 'react-redux';
+import {TextStyled} from '../elements/TextStyled';
+import {Logo} from '../elements/Logo';
 
 const Login = props => {
   return (
-    <View style={styles.loginContainer}>
-      <Text style={styles.header}> Username</Text>
+    <View>
+      <Logo />
+      <TextStyled text='Username' />
         <TextInput style={styles.loginInput} />
-      <Text style={styles.header}> Password</Text>
+      <TextStyled text='Password' />
         <TextInput style={styles.loginInput} />
     </View>
   );
