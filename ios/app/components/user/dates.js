@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import { graphql, compose } from 'react-apollo';
 import { datesQuery } from './gql';
 import colors from '../elements/Colors';

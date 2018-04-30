@@ -8,6 +8,7 @@ import LoggedOut from './login/loggedOut';
 import { Dates } from './user/dates';
 import { Date } from './dates/singleDate';
 import { AddDate } from './dates/addDate';
+import { AddUsers } from './dates/addUsersToDate';
 import Votes from './user/votes';
 import { Account } from './user/account';
 
@@ -32,11 +33,11 @@ export const SignedIn = TabNavigator({
       tabBarLabel: 'ACCOUNT'
     }
   },
-},
   Dates: {
     screen: StackNavigator({
       AllDates: Dates,
       Date: Date,
+      AddUsers: AddUsers,
     }, stackHeader('AllDates')),
     navigationOptions: {
       tabBarLabel: 'DATES'
@@ -64,8 +65,6 @@ export const SignedIn = TabNavigator({
   animationEnabled: true,
   swipeEnabled: false,
 });
-
-
 
 export const SignedOut = StackNavigator({
   Login: { screen: LoggedOut },

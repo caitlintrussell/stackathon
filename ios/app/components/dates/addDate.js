@@ -4,14 +4,11 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Dimensions, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native';
 import { graphql, compose, Query } from 'react-apollo';
 
-import locations from './locations';
-import { GetDateInfo } from './gql';
+import { AddDateMutation } from './gql';
 import colors from '../elements/Colors';
-import Loading from '../elements/Loading';
-import HeaderText from '../elements/Header';
 import TextStyled from '../elements/TextStyled';
 
-export class AddDate extends Component {
+class AddDateComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,14 +16,33 @@ export class AddDate extends Component {
       zipCode: '',
     };
   }
+  _addDate = async () => {
+    const { when, zipCode } = this.state;
+    const {initiator, userId} = this.props.navigation.state.params
+    try {
+      await this.props.AddDateMutation({
+        variables: {
+          initiator,
+          when,
+          zipCode,
+          userId,
+        },
+      })
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   goToAddUsers = async () => {
-    // await this._login();
-    // this.props.navigate('SignedIn');
+    await this._addDate();
+    this.props.navigation.navigate('AddUsers');
   }
   render() {
+    console.log(this.props);
     return (
+      <View style={styles.box2}>
       <KeyboardAvoidingView behavior="padding">
-        <HeaderText text="LOGIN" />
+        <Text style={styles.button}>PLAN A DATE</Text>
         <TextInput
           placeholder="when"
           placeholderTextColor={colors.orange}
@@ -39,7 +55,6 @@ export class AddDate extends Component {
         <TextInput
           style={styles.loginInput}
           placeholder="zipCode"
-          secureTextEntry
           returnKeyType="go"
           placeholderTextColor={colors.orange}
           onChangeText={zipCode => this.setState({ zipCode })}
@@ -54,6 +69,7 @@ export class AddDate extends Component {
           <Text style={styles.button}>SUBMIT</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
+      </View>
     );
   }
 }
@@ -102,4 +118,11 @@ const styles = StyleSheet.create({
     width,
   },
 });
+
+
+export const AddDate = compose(
+  graphql(AddDateMutation, {
+    props: ({ mutate, data }) => ({ AddDateMutation: mutate, data }),
+  })
+)(AddDateComponent);
 

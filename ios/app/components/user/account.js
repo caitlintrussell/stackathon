@@ -14,16 +14,24 @@ class Home extends Component {
     await onSignOut();
     this.props.navigation.navigate('SignedOut');
   };
+  addDate = () => {
+    this.props.navigation.navigate('AddDate', {userId: this.props.data.me.id, initiator: this.props.data.me.name})
+  }
   render() {
     if (!this.props.data.me) return <Loading />;
     const { me } = this.props.data;
     return (
       <View style={styles.container}>
-        <View style={[styles.box1]}>
-          <Logo />
-        </View>
         <View style={[styles.box2]}>
-          <TextStyled text={`Welcome ${me.name.split(' ')[0]}!`} />
+          <Text style={styles.button}>
+            {`Welcome ${me.name.split(' ')[0]}!`.toUpperCase()}
+          </Text>
+          <TouchableOpacity
+            onPress={this.addDate}
+            style={styles.buttonContainer}
+          >
+            <Text style={styles.button}>PLAN A DATE</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={this.logout}
             style={styles.buttonContainer}
@@ -39,15 +47,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-  },
-  box1: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: 20,
-    backgroundColor: colors.orange,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignContent: 'center',
   },
   box2: {
     flex: 9,

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, StyleSheet, Text, AsyncStorage } from 'react-native';
-import Login from './components/login/login';
-import colors from './components/elements/Colors';
+import { AsyncStorage } from 'react-native';
 
 import {createRootNavigator} from './components/nav';
 import { isSignedIn } from './auth';
@@ -17,7 +15,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    // AsyncStorage.removeItem('LOGGED_IN')
+    AsyncStorage.removeItem('LOGGED_IN')
     isSignedIn()
       .then(res => {
         this.setState({ signedIn: res, checkedSignIn: true })})
