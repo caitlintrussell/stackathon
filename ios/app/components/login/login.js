@@ -17,7 +17,6 @@ import { onSignIn } from '../../auth';
 class Login extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       email: '',
       password: '',
@@ -36,12 +35,14 @@ class Login extends Component {
     } catch (err) {
       console.error(err);
     }
-  };
+  }
+
   goToAccount = async () => {
     await this._login();
     await onSignIn();
     this.props.navigate('SignedIn');
-  };
+  }
+
   render() {
     return (
       <KeyboardAvoidingView behavior="padding">

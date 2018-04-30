@@ -8,9 +8,6 @@ export default class Loading extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={[styles.box1]}>
-          <Logo />
-        </View>
         <View style={[styles.box2]}>
           <Header text="Loading..." />
         </View>
@@ -23,15 +20,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-  },
-  box1: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: 20,
-    backgroundColor: colors.orange,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignContent: 'center',
   },
   box2: {
     flex: 9,

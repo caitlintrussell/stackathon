@@ -14,17 +14,19 @@ export default class TextStyled extends Component {
   };
   render() {
     return (
-      <View style={styles.list}>
-        <View style={styles.listItem}>
-          <TouchableOpacity onPress={this.goToDate}>
-          <Text style={styles.button}>{this.props.when}</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.listItem}>
-          <Text style={styles.text}>{this.props.members}</Text>
-        </View>
-        <View style={styles.listItem}>
-          <Text style={styles.text}>{this.props.votes}</Text>
+      <View>
+        <View style={styles.list}>
+          <View style={styles.listItem}>
+            <TouchableOpacity onPress={this.goToDate}>
+            <Text style={styles.button}>{this.props.when}</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.listItem}>
+            <Text style={styles.text}>{this.props.members}</Text>
+          </View>
+          <View style={styles.listItem}>
+            <Text style={styles.text}>{this.props.votes}</Text>
+          </View>
         </View>
       </View>
     );

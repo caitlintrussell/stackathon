@@ -13,6 +13,14 @@ export const meQuery = gql`
   }
 `;
 
+export const logOutQuery = gql`
+mutation {
+  logout {
+    id
+  }
+}
+`;
+
 export const datesQuery = gql`
   query {
     me {

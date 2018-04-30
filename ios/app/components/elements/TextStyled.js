@@ -16,6 +16,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: color.dkTeal,
     fontFamily: 'AvenirNextCondensed-Medium',
-    fontSize: 35,
+    fontSize: 30,
   }
 });

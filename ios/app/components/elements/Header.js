@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     fontFamily: 'AvenirNextCondensed-Bold',
-    fontSize: 55,
+    fontSize: 45,
     textShadowColor: colors.dkTeal,
     textShadowOffset: { width: 1, height: 2 },
     textShadowRadius: 2,
-    marginBottom: 25,
+    marginBottom: 20,
   }
 
 });

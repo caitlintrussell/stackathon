@@ -6,18 +6,38 @@ import colors from './elements/Colors';
 import Logo from './elements/Logo';
 import LoggedOut from './login/loggedOut';
 import { Dates } from './user/dates';
+import { Date } from './dates/singleDate';
+import { AddDate } from './dates/addDate';
 import Votes from './user/votes';
-import { Account } from './user/account'
+import { Account } from './user/account';
+
+const stackHeader = (initial) => ({
+  initialRouteName: initial,
+  navigationOptions: {
+    headerTitle: <Logo />,
+      headerStyle: {
+        backgroundColor: colors.orange,
+      },
+    headerTintColor: '#fff',
+    },
+})
 
 export const SignedIn = TabNavigator({
   Home: {
-    screen: Account,
+    screen: StackNavigator({
+      Account: Account,
+      AddDate: AddDate,
+    }, stackHeader('Account')),
     navigationOptions: {
       tabBarLabel: 'ACCOUNT'
     }
   },
+},
   Dates: {
-    screen: Dates,
+    screen: StackNavigator({
+      AllDates: Dates,
+      Date: Date,
+    }, stackHeader('AllDates')),
     navigationOptions: {
       tabBarLabel: 'DATES'
     }
@@ -46,21 +66,11 @@ export const SignedIn = TabNavigator({
 });
 
 
-export const SignedOut = StackNavigator({
-  LoggedOut: { screen: LoggedOut },
-  Account: { screen: SignedIn },
-  }, {
-  initialRouteName: 'LoggedOut',
-  /* The header config from HomeScreen is now here */
-  navigationOptions: {
-  headerTitle: <Logo />,
-    headerStyle: {
-      backgroundColor: colors.orange,
-    },
-  headerTintColor: '#fff',
-  },
-});
 
+export const SignedOut = StackNavigator({
+  Login: { screen: LoggedOut },
+  Account: { screen: SignedIn },
+  }, stackHeader('Login'));
 
 export const createRootNavigator = (signedIn = false) => {
   return SwitchNavigator(
@@ -77,3 +87,4 @@ export const createRootNavigator = (signedIn = false) => {
     }
   );
 };
+
